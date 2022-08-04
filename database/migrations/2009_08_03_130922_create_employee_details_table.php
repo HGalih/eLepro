@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentsTable extends Migration
+class CreateEmployeeDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,32 +12,31 @@ class CreateStudentsTable extends Migration
      * @return void
      */
     public function up()
-    {        
-        Schema::create('students', function (Blueprint $table) {
+    {
+        Schema::create('employee_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('nickname')->nullable();
+            $table->unsignedBigInteger('position_id');
+            $table->unsignedBigInteger('user_id');
+            $table->enum('gender',['male','female']);
+            $table->date('birthdate')->nullable();
+            $table->string('NIK');
             $table->string('phone');
             $table->string('sosmed01')->nullable();
             $table->string('sosmed02')->nullable();
             $table->string('sosmed03')->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->enum('gender',['male','female']);
-            $table->date('birthdate')->nullable();
-            $table->string('nationality')->nullable();
             $table->text('address')->nullable();
             $table->string('city');
-            $table->string('province')->nullable();
-            $table->string('country')->nullable();
+            $table->string('province');
             $table->string('postcode')->nullable();
+            $table->string('country')->nullable();
+            $table->string('bankaccount')->nullable();
+            $table->string('education');
+            $table->string('occupation')->nullable();
             $table->string('photo')->nullable();
             $table->text('note01')->nullable();
             $table->text('note02')->nullable();
             $table->text('note03')->nullable();
-            $table->unsignedBigInteger('school_id');
-            $table->unsignedBigInteger('status_id');
-            $table->timestamps();        
+            $table->timestamps();
         });
     }
 
@@ -48,6 +47,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('employee_details');
     }
 }

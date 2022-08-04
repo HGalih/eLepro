@@ -23,7 +23,7 @@ class CreateTeacherAvailabilitySchedulesTable extends Migration
 
         Schema::table('teacher_availability_schedules', function (Blueprint $table) {
             $table->foreign('employee_id')
-            ->references('id') -> on('employees');
+            ->references('id') -> on('users');
             $table->foreign('schedule_id')
             ->references('id') -> on('schedules');
             $table->foreign('class_id')

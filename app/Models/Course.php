@@ -33,13 +33,15 @@ class Course extends Model
         return $this->belongsTo(Course::class, 'course_prerequisite_id', 'id');
     }
 
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
+
     public function prerequisite_course(){
         return $this->hasOne(Course::class, 'course_prerequisite_id', 'id');
     }
 
-    public function projects(){
-        return $this->hasMany(Project::class, 'course_id', 'id');
-    }
+
 
     public function classes(){
         return $this->hasMany(Classes::class, 'course_id', 'id');

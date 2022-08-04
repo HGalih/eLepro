@@ -27,6 +27,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'employeeDetail',
+        'studentDetail',
     ];
 
     /**
@@ -58,4 +61,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function StudentDetail()
+    {
+        return $this->hasOne(studentDetail::class);
+    }
+    public function employeeDetail()
+    {
+        return $this->hasOne(employeeDetail::class);
+    }
+    public function ClassMembers(){
+        return $this->hasMany(ClassMember::class,'student_id');
+    }
+    public function Progresses(){
+        return $this->hasMany(StudentProgress::class,'student_id');
+    }
+    public function SupClasses(){
+        return $this->hasMany(Classes::class,'supervisor_id');
+    }
 }

@@ -26,8 +26,10 @@ class Classes extends Model
         return $this->belongsTo(Location::class, 'location_id', 'id');
     }
 
+
+
     public function supervisor(){
-        return $this->belongsTo(Employee::class, 'supervisor_id', 'id');
+        return $this->belongsTo(Employeedetail::class, 'supervisor_id', 'id');
     }
 
     public function classtype(){

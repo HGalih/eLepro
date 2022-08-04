@@ -38,7 +38,7 @@ class CreateClassMeetingsTable extends Migration
             $table->foreign('occurence_id')
             ->references('id') -> on('class_occurences');
             $table->foreign('approved_by')
-            ->references('id') -> on('employees');
+            ->references('id') -> on('employee_details');
         });  
     }
 

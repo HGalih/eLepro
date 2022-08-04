@@ -21,7 +21,9 @@ class Project extends Model
     {
         return $this->belongsTo(Course::class, 'course_id', 'id' );
     }
-
+    public function milestones(){
+        return $this->hasMany(ProjectMilestone::class);
+    }
     // public function students()
     // {
     //     return $this->belongsToMany(Student::class, 'portfolios', 'project_id', 'student_id')

@@ -36,7 +36,7 @@ class CourseSeeder extends Seeder
             'age_requirement' => '7-16 tahun',
             'level_id' => 2,
             'category_id' => 1,      
-            'course_prerequisite_id' => 1,      
+            //'course_prerequisite_id' => 1,      
             'application' => 'Scratch & Construct',
             'description' => 'Yuk bikin game 2D yang keren dan canggih tampilannya. 
             Melalui course ini kamu akan belajar mengembangkan kemampuan coding kamu dengan membuat berbagai game yang super keren.
@@ -53,7 +53,7 @@ class CourseSeeder extends Seeder
             'age_requirement' => '10-16 tahun',
             'level_id' => 2,
             'category_id' => 2,      
-            'course_prerequisite_id' => 1,      
+            //'course_prerequisite_id' => 1,      
             'application' => 'Thunkable',
             'description' => 'Mau tahu cara buat aplikasi untuk handphone? 
             Di masa depan, bahkan saat ini handphone akan semakin banyak digunakan. Baik dari hal sederhana seperti bermain atau berbelanja hingga untuk mengatur bisnis. 
@@ -68,7 +68,7 @@ class CourseSeeder extends Seeder
             'age_requirement' => '10-16 tahun',
             'level_id' => 2,
             'category_id' => 3,      
-            'course_prerequisite_id' => 1,      
+            //'course_prerequisite_id' => 1,      
             'application' => 'Python',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tenetur voluptates repellat, minima vitae nesciunt alias voluptas similique nobis magnam.'
         ]);
@@ -128,7 +128,7 @@ class CourseSeeder extends Seeder
             'age_requirement' => '10-16 tahun',
             'level_id' => 1,
             'category_id' => 5,      
-            'course_prerequisite_id' => 8,      
+            //'course_prerequisite_id' => 8,      
             'application' => 'Wordpress',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tenetur voluptates repellat, minima vitae nesciunt alias voluptas similique nobis magnam.'
         ]);
@@ -140,7 +140,7 @@ class CourseSeeder extends Seeder
             'age_requirement' => '13-16 tahun',
             'level_id' => 1,
             'category_id' => 5,      
-            'course_prerequisite_id' => 8,      
+            //'course_prerequisite_id' => 8,      
             'application' => 'HTML, CSS, Bootstrap, JQuery',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tenetur voluptates repellat, minima vitae nesciunt alias voluptas similique nobis magnam.'
         ]);        
@@ -152,7 +152,7 @@ class CourseSeeder extends Seeder
             'age_requirement' => '13-16 tahun',
             'level_id' => 1,
             'category_id' => 5,      
-            'course_prerequisite_id' => 10,      
+            //'course_prerequisite_id' => 10,      
             'application' => 'HTML, CSS, Bootstrap, PHP, Database, SQL',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tenetur voluptates repellat, minima vitae nesciunt alias voluptas similique nobis magnam.'
         ]);        

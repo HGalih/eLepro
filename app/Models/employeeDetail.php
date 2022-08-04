@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Model
+class employeeDetail extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'position_id',
-        'name',
         'gender',
         'birthdate',
         'NIK',
@@ -25,8 +22,6 @@ class Employee extends Model
         'province',
         'country',
         'postcode',
-        'email',
-        'password',
         'bankaccount',
         'education',
         'occupation',
@@ -36,12 +31,6 @@ class Employee extends Model
         'note02',
         'note03'
     ];
-
-    public function getAge()
-    {
-        $age = Carbon::parse($this->birthdate)->age;     
-        return $age;
-    }
 
     public function employee_position(){
         return $this->belongsTo(EmployeePosition::class, 'position_id', 'id');

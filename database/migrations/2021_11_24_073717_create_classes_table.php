@@ -23,7 +23,7 @@ class CreateClassesTable extends Migration
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('supervisor_id');
             $table->unsignedBigInteger('classtype_id');
-//            $table->unsignedBigInteger('schedule_id'); m-to-m
+//          $table->unsignedBigInteger('schedule_id'); m-to-m
             $table->timestamps();
 });
     }

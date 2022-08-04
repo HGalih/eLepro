@@ -29,7 +29,7 @@ class ClassesFactory extends Factory
             'course_id' => mt_rand(1,3),      
             'location_id' => mt_rand(1,2),      
             'supervisor_id' => 1,      
-            'classtype_id' => mt_rand(1,3)
-        ];
+            'classtype_id' => mt_rand(1,3),
+                ];
     }
 }

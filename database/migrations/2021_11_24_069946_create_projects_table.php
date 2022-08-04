@@ -16,6 +16,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('project_title');
             $table->text('description')->nullable();
+            $table->string('teachmodul_url')->nullable();
             $table->string('example_url')->nullable();
             $table->string('application')->nullable();
             $table->string('image')->nullable();

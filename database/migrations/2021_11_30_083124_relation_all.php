@@ -36,7 +36,7 @@ class RelationAll extends Migration
         });
 
 
-        Schema::table('employees', function (Blueprint $table) {
+        Schema::table('employee_details', function (Blueprint $table) {
             $table->foreign('position_id')
             ->references('id') -> on('employee_positions');
             });
@@ -53,13 +53,13 @@ class RelationAll extends Migration
             $table->foreign('location_id')
             ->references('id') -> on('locations');
             $table->foreign('supervisor_id')
-            ->references('id') -> on('employees');
+            ->references('id') -> on('users');
             $table->foreign('classtype_id')
             ->references('id') -> on('classtypes');
         });
 
 
-        Schema::table('students', function (Blueprint $table) {
+        Schema::table('student_details', function (Blueprint $table) {
             $table->foreign('school_id')
             ->references('id') -> on('schools');
             $table->foreign('status_id')
