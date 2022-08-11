@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProjectMilestone;
-
+use Auth;
 class MilestoneController extends Controller
 {
     /**
@@ -34,8 +34,16 @@ class MilestoneController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $milestone = new ProjectMilestone;
+        $milestone->video_url = $request->video_url;
+        $milestone->studentmodul_url = $request->studentmodul_url;
+        $milestone->milestone = $request->milestone;
+        $milestone->description = $request->description;
+        $milestone->point = $request->point;
+        $milestone->project_id= $request->project_id;
+        $milestone->save();
+        return back();
     }
 
     /**
@@ -46,7 +54,16 @@ class MilestoneController extends Controller
      */
     public function show($id)
     {
-        return view('showMilestone')->with('milestone',ProjectMilestone::find($id));
+        if(Auth::user()->role == 2){
+            if(Auth::user()->Progresses->where('milestone_id','=',$id)->first()!=null){
+                return view('showMilestone')->with('milestone',ProjectMilestone::find($id));
+            }else{
+                return back();
+            }
+        
+        }else{
+            return view('showMilestone')->with('milestone',ProjectMilestone::find($id));
+        }
     }
 
     /**

@@ -1,8 +1,10 @@
 <head>
     @if(Auth::user()->role == 1)
-    <meta http-equiv="refresh" content="0; url={{route('courses.index')}}" />
-    @elseif(Auth::user()->role == 3)
-    <meta http-equiv="refresh" content="0; url={{route('classes.index')}}" />
+        @if(Auth::user()->EmployeeDetail->position_id == 3)
+        <meta http-equiv="refresh" content="0; url={{route('courses.index')}}" />
+        @else
+        <meta http-equiv="refresh" content="0; url={{route('classes.index')}}" />
+        @endif
     @elseif(Auth::user()->role == 2)
     <meta http-equiv="refresh" content="0; url={{route('classes.index')}}" />
     @endif

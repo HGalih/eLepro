@@ -12,9 +12,40 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-jet-nav-link href="{{ route('classes.index') }}" :active="request()->routeIs('index')">
+                        {{ __('My Classes') }}
                     </x-jet-nav-link>
+                    @if(Auth::user()->role == 1)
+                    @if(Auth::user()->EmployeeDetail->position_id == 3)
+                    <x-jet-nav-link href="{{ route('courses.index') }}" :active="request()->routeIs('courses')">
+                        {{ __('Manage Courses') }}
+                    </x-jet-nav-link>
+                    @endif
+                    @endif
+                    @if(Auth::user()->role == 1)
+                    @if(Auth::user()->EmployeeDetail->position_id == 3)
+                    <x-jet-nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('courses')">
+                        {{ __('Manage Employee') }}
+                    </x-jet-nav-link>
+                    @endif
+                    @endif
+                    @if(Auth::user()->role == 1)
+                    @if(Auth::user()->EmployeeDetail->position_id == 3)
+                    <x-jet-nav-link href="{{ route('students.index') }}" :active="request()->routeIs('courses')">
+                        {{ __('Manage Student') }}
+                    </x-jet-nav-link>
+                    @endif
+                    @endif
+                    @if(Auth::user()->role == 2)
+                    <x-jet-nav-link href="{{ route('reward.index') }}" :active="request()->routeIs('courses')">
+                        {{ __('My Reward') }}
+                    </x-jet-nav-link>
+                    @endif
+                    @if(Auth::user()->role == 1)
+                    <x-jet-nav-link href="{{ route('reward.index') }}" :active="request()->routeIs('courses')">
+                        {{ __('Manage Reward') }}
+                    </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -140,6 +171,11 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
+            @if(Auth::user()->role == 1)
+            <x-jet-responsive-nav-link href="{{ route('courses.index') }}" :active="request()->routeIs('dashboard')">
+                {{ __('Courses') }}
+            </x-jet-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

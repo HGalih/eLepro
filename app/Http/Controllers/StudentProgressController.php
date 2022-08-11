@@ -46,7 +46,7 @@ class StudentProgressController extends Controller
         $StudentProgress->student_id = $request->student_id;
         $StudentProgress->milestone_id = $request->milestone_id;
         $StudentProgress->save();
-        return back();  
+        return redirect(url()->previous()."#goHere"); 
     }
 
     /**
@@ -91,10 +91,9 @@ class StudentProgressController extends Controller
      */
     public function destroy($id)
     {
-        
         $studentProgress = StudentProgress::find($id);
         $studentProgress->student->StudentDetail->decrement('point',$studentProgress->milestone->point);
         $studentProgress->delete();
-        return back();
+        return redirect(url()->previous()."#goHere");
     }
 }

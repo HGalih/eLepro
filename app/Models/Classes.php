@@ -29,7 +29,7 @@ class Classes extends Model
 
 
     public function supervisor(){
-        return $this->belongsTo(Employeedetail::class, 'supervisor_id', 'id');
+        return $this->belongsTo(User::class, 'supervisor_id', 'id');
     }
 
     public function classtype(){
@@ -40,6 +40,9 @@ class Classes extends Model
         return $this->hasMany(TeacherAvailabilitySchedule::class, 'class_id', 'id');
     }
 
+    public function ClassMembers(){
+        return $this->hasMany(ClassMember::class,'class_id');
+    }
     // public function projects(){
     //     return $this->hasMany(Project::class, 'course_id', 'id');
     // }

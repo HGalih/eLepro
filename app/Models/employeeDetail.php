@@ -43,4 +43,7 @@ class employeeDetail extends Model
     public function teacher_availability_schedule(){
         return $this->hasMany(TeacherAvailabilitySchedule::class, 'employee_id', 'id');
     }
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

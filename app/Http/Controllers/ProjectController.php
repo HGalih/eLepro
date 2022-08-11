@@ -39,7 +39,17 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project = new Project;
+        $project->project_title = $request->projecttitle;
+        $project->description = $request->description;
+        $project->teachmodul_url = $request->teachmodul;
+        $project->example_url = $request->example;
+        $project->application = $request->application;
+        $project->image = $request->image;
+        $project->course_id = $request->course;
+        $project->save();
+        return back();
+
     }
 
     /**
@@ -51,16 +61,10 @@ class ProjectController extends Controller
     public function show($id, Request $request)
     {
         $class = $request->class;
-        if(Auth::User()->role==2){
         return view('showProject')
         ->with('project',Project::find($id))
         ->with('milestoneList',ProjectMilestone::where('project_id','=',$id)->orderBy('orderno')->get())
         ->with('studentList',User::wherein('id',ClassMember::where('class_id','=',$class)->pluck('student_id'))->get());
-    }else{
-        return view('showProject')
-        ->with('project',Project::find($id))
-        ->with('milestoneList',ProjectMilestone::where('project_id','=',$id)->orderBy('orderno')->get());
-    }
     }
 
     /**

@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+     <a href="{{url()->previous()}}"> <button type="button" class="inline-block mr-2 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Back</button>
+     </a><h2 class="font-semibold inline-block   text-xl text-gray-800 leading-tight">
             {{ __('Milestone') }}
         </h2>
     </x-slot>
@@ -13,13 +14,16 @@
           <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-5">
             <div class="px-4 py-5 sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900">{{$milestone->milestone}} <span class="text-green-600">({{$milestone->point}} Point)</span></h3>
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">Resource: {{$milestone->studentmodul_url}}</p>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">{{$milestone->description}}</p>
             </div>
          
         </div>
-          <div class="aspect-w-16 aspect-h-9">
-            <iframe src="{{$milestone->video_url}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
+        <div class="video-container mt-3">
+          <iframe class="video" src="{{$milestone->video_url}}" allowfullscreen></iframe>
+      </div>
+
+          
          
 </body>
     </div>
@@ -86,3 +90,19 @@
 </div>
 
 
+<style>
+  .video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+</style>

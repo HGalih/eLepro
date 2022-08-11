@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        User::factory(10)->create();
+        // User::factory(10)->create();
         $this->call([
             StudentStatusSeeder::class,
             SchoolStatusSeeder::class,
@@ -38,22 +38,21 @@ class DatabaseSeeder extends Seeder
             ClasstypeSeeder::class,
             CourseCategorySeeder::class,
             CourseLevelSeeder::class,
-            CourseSeeder::class,
+            //CourseSeeder::class,
             EmployeePositionSeeder::class,
             LanguageSeeder::class,
-            ScheduleSeeder::class,
-            TransactionSeeder::class
+            UserRoleSeeder::class,
+            //ScheduleSeeder::class,
+            //TransactionSeeder::class
         ]);
         Location::factory(2)->create();
-        //Course::factory(5)->create();
-        Price::factory(6)->create();
-        Project::factory(10)->create();
-        School::factory(3)->create();
-        StudentDetail::factory(10)->create();
-        EmployeeDetail::factory(3)->create();
-        Classes::factory(5)->create();
+        //Price::factory(6)->create();
+        //Project::factory(10)->create();
+        //School::factory(3)->create();
+        //StudentDetail::factory(10)->create();
+        //EmployeeDetail::factory(3)->create();
+        //Classes::factory(5)->create();
 
-         // Portfolio::factory(15)->create();
 
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Classes;
 use App\Models\ClassMember;
-use Auth;
+use App\Models\User;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -15,10 +17,10 @@ class ClassController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role == 3){
-        return view('manageClass')->with('classList', Auth::user()->ClassMembers()->get());
-    }else{
-        return view('manageClass')->with('classList', Auth::user()->SupClasses()->get());
+        if(auth()->user()->role == 2){
+        return view('manageClass')->with('classList', auth()->user()->ClassMembers()->get());
+    }elseif(auth()->user()->role == 1){
+        return view('manageClass')->with('classList', auth()->user()->SupClasses()->get());
     }
     }
 
@@ -41,16 +43,16 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         $classes = new classes;
-        $classes->code = $request->code;
-        $classes->classes = $request->classes;
-        $classes->totalmeets = $request->totalmeets;
-        $classes->age_requirement = $request->age_requirement;
-        $classes->level_id = $request->level;
-        $classes->category_id = $request->category;
+        $classes->classname = $request->classname;
+        $classes->startdate = $request->startdate;
+        $classes->enddate = $request->enddate;
         $classes->description = $request->description;
-        $classes->application = $request->application;
+        $classes->course_id = $request->course;
+        $classes->location_id = $request->location;
+        $classes->supervisor_id = $request->supervisor;
+        $classes->classtype_id = $request->classtype;
         $classes->save();
-        return redirect('/classess');
+        return back();
     }
 
     /**
@@ -61,7 +63,11 @@ class ClassController extends Controller
      */
     public function show($id)
     {
-        return view('showClass')->with('class',Classes::find($id));
+        return view('showClass')
+        ->with('class',Classes::find($id))
+        ->with('studentList',User::all()->where('role','=',2)->whereNotIn('id',Classes::find($id)
+        ->ClassMembers->pluck('student_id')))->with('registeredStudent',User::all()->where('role','=',2)->whereIn('id',Classes::find($id)
+        ->ClassMembers->pluck('student_id')));
     }
 
     /**

@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      <a href="{{url()->previous()}}"> <button type="button" class="inline-block mr-2 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Back</button></a>
+
+        <h2 class="font-semibold text-xl inline-block text-gray-800 leading-tight">
             {{ $class->classname }}
         </h2>
     </x-slot>
@@ -24,10 +26,11 @@
                       </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                      @if(Auth::user()->role==3)
+                      @if(auth()->user()->role==2)
+              
                       @foreach($class->course->projects as $project)
                       @if($project->milestones->first() != null)
-                      @if(Auth::user()->progresses->where('milestone_id','=',$project->milestones->first()->id)->first() != null)
+                      @if(auth()->user()->progresses->where('milestone_id','=',$project->milestones->first()->id)->first() != null)
                       <tr>
                         <td class="px-6 py-4 whitespace-nowrap">
                           <div class="flex items-center">
@@ -43,11 +46,11 @@
              
                    
                       
-                        @if(Auth::user()->progresses->where('milestone_id','=',$project->milestones->sortBy('orderno')->last()->id)->first() != null)
+                        @if(auth()->user()->progresses->where('milestone_id','=',$project->milestones->sortBy('orderno')->last()->id)->first() != null)
                         <td class="px-6 py-4 whitespace-nowrap">
                           <span class="px-2 inline-flex py-2 text-lg leading-5 font-semibold rounded-full bg-green-100 text-green-600"> Done </span>
                         </td>
-                        @elseif(Auth::user()->progresses->where('milestone_id','=',$project->milestones->sortBy('orderno')->first()->id)->first() != null)
+                        @elseif(auth()->user()->progresses->where('milestone_id','=',$project->milestones->sortBy('orderno')->first()->id)->first() != null)
                         <td class="px-6 py-4 whitespace-nowrap">
                           <span class="px-2 inline-flex py-2 text-lg leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-600"> On Progress </span>
                         </td>
@@ -66,7 +69,7 @@
                       @endif
                       @endif
                       @endforeach
-                      @elseif(Auth::user()->role==2)
+                      @elseif(auth()->user()->role== 1)
                       @foreach($class->course->projects as $project)
                       <tr>
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -107,10 +110,76 @@
                     </tbody>
                   </table>
                 </div>
+                  @if(Auth()->user()->role == 1)
                   <h3 class="mt-5">Registered Student</h3>
-                    
+                  <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+			<thead class="text-white">
+				<tr class="bg-blue-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+					<th class="p-3 text-left">Name</th>
+					<th class="p-3 text-left">School</th>
+                    <th class="p-3 text-left">Status</th>
+					<th class="p-3 text-left" width="110px">Actions</th>
+				</tr>
+				<tr class="bg-blue-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                <th class="p-3 text-left">Name</th>
+					<th class="p-3 text-left">School</th>
+                    <th class="p-3 text-left">Status</th>
+					<th class="p-3 text-left" width="110px">Actions</th>
+				</tr>
+                <tr class="bg-blue-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                <th class="p-3 text-left">Name</th>
+					<th class="p-3 text-left">School</th>
+                    <th class="p-3 text-left">Status</th>
+                  <th class="p-3 text-left" width="110px">Actions</th>
+              </tr>
+                <tr class="bg-blue-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                <th class="p-3 text-left">Name</th>
+					<th class="p-3 text-left">School</th>
+                    <th class="p-3 text-left">Status</th>
+                  <th class="p-3 text-left" width="110px">Actions</th>
+              </tr>
+			</thead>
+			<tbody class="flex-1 sm:flex-none">
+                
+        @foreach($registeredStudent as $student)
+        
+				<tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+					<td class="border-grey-light border hover:bg-gray-100 p-3">{{$student->name}}</td>
+					<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{$student->studentDetail->school->school}}</td>
+					<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{$student->studentDetail->status_id}}</td>
+          
+         
+          
+					<td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">              
+            <form action="{{route('classmember.destroy2')}}" method="POST">
+              @csrf
+            <input type="hidden" name="student_id" value="{{$student->id}}">
+            <input type="hidden" name="class_id" value="{{$class->id}}">
+            <button type="submit" class=" mb-5 bg-indigo-500 mt-2 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">Remove</button> 
+          </form>
+          </td>
+        </tr>
+    
 
-
+        @endforeach
+			</tbody>
+		</table>
+   
+                  <div class="col-span-6 sm:col-span-2">
+                    <form action="{{route('classmember.store')}}" method="POST">
+                    @CSRF
+                    <input type="hidden" name="class_id" value="{{$class->id}}">
+                    <label for="country" class="block text-sm font-medium text-gray-700 mt-4">Register Student to {{$class->classname}}</label>
+                
+                    <select id="country" name="student_id" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    @foreach($studentList as $student)
+                    <option value="{{$student->id}}">{{$student->name}}</option>
+                    @endforeach
+                    </select>
+                    <button type="submit" class=" mb-5 bg-indigo-500 mt-2 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">Add Student</button> 
+                  </div>
+                </form>
+                @endif
                 </div>
               </div>
             </div>
@@ -122,3 +191,27 @@
 </x-app-layout>
 
 
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+
+  @media (min-width: 640px) {
+    table {
+      display: inline-table !important;
+    }
+
+    thead tr:not(:first-child) {
+      display: none;
+    }
+  }
+
+  td:not(:last-child) {
+    border-bottom: 0;
+  }
+
+  th:not(:last-child) {
+    border-bottom: 2px solid rgba(0, 0, 0, .1);
+  }
+</style>
