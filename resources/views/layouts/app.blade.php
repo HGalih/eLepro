@@ -16,6 +16,7 @@
 
         <!-- Scripts -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @stack('scripts')
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -39,6 +40,7 @@
         </div>
 
         @stack('modals')
+        @livewire('notifications')
 
         @livewireScripts
     </body>
