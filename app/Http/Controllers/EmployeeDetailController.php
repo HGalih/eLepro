@@ -54,7 +54,7 @@ class EmployeeDetailController extends Controller
             'position' => ['required'],
             'city' => ['required'],
             'gender' => ['required'],
-            'birthdate' => ['required'],
+
             'NIK' => ['required'],
             'Phone' => ['required'],
             'province' => ['required'],

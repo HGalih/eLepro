@@ -6,15 +6,15 @@
             {{ __($course->course) }}
         </h2>
     </x-slot>
-    
-        
-   
+
+
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h3 class="text-3xl mb-2">Manage Class</h3>          <button id="myBtn"  class=" mb-5 bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">Add Class</button> 
+            <h3 class="text-3xl mb-2">Manage Class</h3>          <button id="myBtn"  class=" mb-5 bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">Add Class</button>
             <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                 @foreach ($classList as $class)
-                
+
                 <li class="relative">
                  <a href="{{route('classes.show',$class->id)}}">
                   <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
@@ -28,16 +28,16 @@
                   <p class="block text-sm font-medium text-gray-500 pointer-events-none">{{$class->supervisor->name}}</p>
                 </li>
                 @endforeach
-              
+
                 <!-- More files... -->
               </ul>
               <h3 class="text-3xl mt-5 mb-2">Manage Project</h3>
-              <button id="myBtn2"  class=" mb-5 bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">Add Project</button> 
+              <button id="myBtn2"  class=" mb-5 bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">Add Project</button>
               <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                 @foreach ($projectList as $project)
                 <li class="relative">
                   <a href="{{route('project.show',$project->id)}}"><div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-                    <img src="https://www.sragenkab.go.id/assets/images/image-not-available-.jpg" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                    <img src="{{$project->img ?? "https://www.sragenkab.go.id/assets/images/image-not-available-.jpg"}}" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
                     <button type="button" class="absolute inset-0 focus:outline-none">
                       <span class="sr-only"></span>
                     </button>
@@ -46,14 +46,14 @@
                   <p class="block text-sm font-medium text-gray-500 pointer-events-none">{{$project->description}}</p>
                 </li>
                 @endforeach
-              
+
                 <!-- More files... -->
               </ul>
-              
+
         </div>
 </body>
     </div>
-    
+
 </x-app-layout>
 
 
@@ -148,7 +148,7 @@
                           <input value="{{$course->id}}" name="course" readonly type="hidden" name="age_requirement" placeholder="Ex: 7-16 Tahun" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
 
                         </div>
-                 
+
                         <div class="col-span-6 sm:col-span-2">
                           <label for="country" class="block text-sm font-medium text-gray-700">Location</label>
                           <select id="country" name="location" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -157,7 +157,7 @@
                             @endforeach
                           </select>
                         </div>
-            
+
                         <div class="col-span-6 sm:col-span-2">
                           <label for="country" class="block text-sm font-medium text-gray-700">Supervisor</label>
                           <select id="country" name="supervisor" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -175,12 +175,12 @@
                             @endforeach
                           </select>
                         </div>
-                       
+
                           </div>
                         </div>
-           
+
               </div>
-            
+
             </div>
           </div>
         </div>
@@ -198,7 +198,7 @@
 
 
 
-      
+
     </div>
   </div>
 </div>
@@ -277,13 +277,13 @@
                           <input value="{{$course->id}}" name="course" readonly type="hidden" name="age_requirement" placeholder="Ex: 7-16 Tahun" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
 
                         </div>
-                 
-                       
+
+
                           </div>
                         </div>
-           
+
               </div>
-            
+
             </div>
           </div>
         </div>
