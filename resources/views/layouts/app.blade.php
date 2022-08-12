@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://cdn.tailwindcss.com"></script>
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <script src="{{ mix('/js/app.js') }}"></script>
+        <script src="{{ mix('/js/app.js') }}" defer></script>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
