@@ -9,7 +9,6 @@
     </x-slot>
     
         
-   
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -29,11 +28,11 @@
       </div>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">Project Example URL</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{$project->example_url}}</dd>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><a>{{$project->example_url}}</a></dd>
       </div>
       <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">Application</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{$project->application}}</dd>
+        <dd class="mt-1 text-sm text-blue-500 sm:mt-0 sm:col-span-2"><a href={{$project->application}}>{{$project->application}}</a></dd>
       </div>
     
     </dl>
@@ -188,8 +187,10 @@
                     <thead class="bg-gray-50">
                       <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+
                         @foreach($milestoneList as $milestone)
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{$milestone->milestone}}</th>
+                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">{{$milestone->orderno}}</th>
                         @endforeach
                        
                       </tr>
@@ -208,8 +209,41 @@
                             </div>
                           </div>
                         </td>
+                        <td class="text-center">
+                            @if($student->project->where('project_id','=',$project->id)->first())
+                            <button onClick="myFunction({{$student->id}})" class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">{{$student->project->where('project_id','=',$project->id)->first()->status->status}}</button>
+                            @else
+                            <button  onClick="myFunction({{$student->id}})" class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">N/A</button>
+                            @endif
+                           
+                
+                              <div id="mydropdown{{$student->id}}" class="hidden -mt-5">
+                                <form method="POST" action="{{route('studentproject.store')}}">
+                                  @CSRF
+                                  <input type="hidden" name="project" value="{{$project->id}}">
+                                  <input type="hidden" name="student" value="{{$student->id}}">
+                                <select name="status" class="rounded-lg p-2">
+                                
+
+                                  @foreach (DB::table('project_status')->select('status','id')->get() as $item)
+                                  
+                                    <option value="{{$item->id}}">
+
+                                      {{$item->status}}
+                                    </option>
+                                  @endforeach
+                                  </select>
+                              
+                                  <button type="submit" class="block text-center w-full"  class="block text-green-500">Save</button>
+                                  <a onClick="myFunction(999)"  class="block text-red-500">Cancel</button>
+
+                                </form>
+                              </div>
+                            
+                            
+                        </td>
                         @foreach($milestoneList as  $milestone)
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-6 py-4 text-center whitespace-nowrap">
                           <div class="text-sm text-gray-900"></div>
                           <div class="text-sm text-gray-500">
                             
@@ -218,14 +252,14 @@
                               <input type="hidden" name="_method" value="DELETE">
                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
                              <input type="hidden" name="point" value="{{$milestone->point}}">
-                            <button type="submit" class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"> Opened </span></button>
+                            <button type="submit" class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"> ✓ </span></button>
                             @else
                             <form method=POST action="{{route('studentprogress.store')}}">
                               @csrf
                               <input type="hidden" name="milestone_id" value="{{$milestone->id}}">
                               <input type="hidden" name="student_id" value="{{$student->id}}">
                               <input type="hidden" name="point" value="{{$milestone->point}}">
-                            <button type="submit" class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800"> Closed </span></button>
+                            <button type="submit" class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800"> X </span></button>
                             </a>
                             @endif
                           </form>
@@ -325,7 +359,7 @@
             
                         <div class="col-span-6 sm:col-span-6">
                           <label for="last-name" class="block text-sm font-medium text-gray-700">Description</label>
-                          <input type="text" name="description" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                          <textarea name="description" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
                         </div>
             
                         <div class="col-span-6 sm:col-span-2">
@@ -405,4 +439,65 @@ window.onclick = function(event) {
   }
 }
 
+function myFunction($id) {
+  $a =  Array.from(document.getElementsByClassName('show'));
+  $a.forEach(element => {
+    element.classList.remove('show');
+  });
+  if($id != 999){
+  document.getElementById("mydropdown"+$id).classList.add('show');
+  }
+}
+
+
+
+// Close the dropdown menu if the user clicks outside of it
+
 </script>
+
+<style>
+  /* Dropdown Button */
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+</style>

@@ -13,6 +13,8 @@ use App\Http\Controllers\StudentProgressController;
 use App\Http\Controllers\EmployeeDetailController;
 use App\Http\Controllers\ClassMemberController;
 use App\Http\Controllers\RewardController;
+use App\Http\Controllers\PointTransactionController;
+use App\Http\Controllers\StudentRewardTransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,17 +51,23 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::resources([
+        'students' => StudentDetailController::class,
+        'courses' => CourseController::class,
+        'project' => ProjectController::class,
+        'milestone' => MilestoneController::class,
+        'classes' => ClassController::class,
+        'studentprogress' => StudentProgressController::class,
+        'employee' => EmployeeDetailController::class,
+        'classmember'=>ClassMemberController::class,
+        'reward'=>RewardController::class,
+        'point'=>PointTransactionController::class,
+        'studentproject'=>StudentProjectController::class,
+        'transaction'=>StudentRewardTransactionController::class,
+
+    ]);
 });
 
 
-Route::resources([
-    'students' => StudentDetailController::class,
-    'courses' => CourseController::class,
-    'project' => ProjectController::class,
-    'milestone' => MilestoneController::class,
-    'classes' => ClassController::class,
-    'studentprogress' => StudentProgressController::class,
-    'employee' => EmployeeDetailController::class,
-    'classmember'=>ClassMemberController::class,
-    'reward'=>RewardController::class,
-]);
+

@@ -18,7 +18,7 @@
                 @foreach ($classList as $classMember)
                 <li class="relative">
                   <a href="{{route('classes.show',$classMember->class->id)}}"><div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-                    <img src="https://www.sragenkab.go.id/assets/images/image-not-available-.jpg" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                    <img src="https://i0.wp.com/calmatters.org/wp-content/uploads/2021/08/class-size.jpg?fit=2266%2C1322&ssl=1" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
                     
                     <button type="button" class="absolute inset-0 focus:outline-none">
                       <span class="sr-only"></span>
@@ -32,7 +32,7 @@
               @foreach ($classList as $class)
                 <li class="relative">
                   <a href="{{route('classes.show',$class->id)}}"><div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-                    <img src="https://www.sragenkab.go.id/assets/images/image-not-available-.jpg" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                    <img src="https://i0.wp.com/calmatters.org/wp-content/uploads/2021/08/class-size.jpg?fit=2266%2C1322&ssl=1" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
                   
                     <button type="button" class="absolute inset-0 focus:outline-none">
                       <span class="sr-only"></span>

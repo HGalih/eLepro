@@ -35,8 +35,14 @@
                         class=" mb-5 mt-5 bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
                     Add Reward
                 </button>
+          
             @endif
-
+            <a href="{{route('transaction.index')}}">
+            <button 
+            class=" mb-5 mt-5 bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
+        See My Shopping Cart
+    </button>
+</a>
             {{-- <button id="myBtn"  class=" mb-5 bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">Add Class</button>  --}}
 
 
@@ -46,6 +52,14 @@
 
                     @foreach ($rewardList as $reward)
                         <li class="relative">
+                            <form name="add{{$reward->id}}" action="{{route('transaction.store')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="student" value="{{Auth::user()->id}}">
+                                <input type="hidden" name="status" value=0>
+                                <input type="hidden" name="reward" value="{{$reward->id}}">
+                                <input type="hidden" name="point" value="{{$reward->price}}">
+                            
+                            <a @if(Auth::user()->StudentDetail->point >= $reward->price)href="#" onclick="document.add{{$reward->id}}.submit();" @endif >
                             <div
                                 class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
                                 <img src="{{$reward->img}}" alt=""
@@ -55,6 +69,8 @@
                                     <span class="sr-only"></span>
                                 </button>
                             </div>
+                        </a>
+                        </form>
                             <a href=""><p
                                     class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{{$reward->reward}}</p>
                             </a>

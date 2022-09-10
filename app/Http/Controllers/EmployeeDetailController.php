@@ -126,9 +126,18 @@ class EmployeeDetailController extends Controller
      * @param \App\Models\employeeDetail $employeeDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateemployeeDetailRequest $request, employeeDetail $employeeDetail)
+    public function update(Request $request)
     {
-        //
+        $employee = employeeDetail::find($request->id);
+        
+        $user = $employee->user;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        $data = array_filter($request->except(['name','email']));
+        $employee->update($data);
+        return $this->show($user);
     }
 
     /**

@@ -79,4 +79,10 @@ class User extends Authenticatable
     public function SupClasses(){
         return $this->hasMany(Classes::class,'supervisor_id');
     }
+    public function project(){
+        return $this->hasMany(studentproject::class,'student_id');
+    }
+    public function RewardTransaction(){
+        return $this->hasMany(StudentRewardTransaction::class,'student_id');
+    }
 }

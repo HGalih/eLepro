@@ -42,6 +42,7 @@ class MilestoneController extends Controller
         $milestone->description = $request->description;
         $milestone->point = $request->point;
         $milestone->project_id= $request->project_id;
+        $milestone->orderno = $request->orderno;
         $milestone->save();
         return back();
     }
